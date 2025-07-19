@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Radar Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="map-controls">
+                <div class="map-toggle">
+                    <button id="worldViewBtn" class="view-btn active">World View</button>
+                    <button id="indiaViewBtn" class="view-btn">India View</button>
+                </div>
+                <div id="indiaZoneFilters" class="zone-filters" style="display:none;">
+                    <h4>India Zone Filters</h4>
+                    <div class="filter-options">
+                        <label><input type="checkbox" class="zone-filter" value="red" checked> Red Zones</label>
+                        <label><input type="checkbox" class="zone-filter" value="yellow" checked> Yellow Zones</label>
+                        <label><input type="checkbox" class="zone-filter" value="green" checked> Green Zones</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="control-panel">
+            <h2>Drone Tracking Controls</h2>
+            <div class="button-group">
+                <button id="monitorBtn" class="btn">Monitor Air Traffic</button>
+                <button id="frequencyBtn" class="btn">Run Frequency Scan</button>
+                <button id="violationBtn" class="btn">Detect Violations</button>
+                <button id="clearBtn" class="btn btn-clear">Clear All</button>
+            </div>
+
+            <div id="frequencyPlot" class="plot-container"></div>
+
+            <div id="violationTableContainer" class="table-container">
+                <h3>Drone Violations</h3>
+                <div class="stats">
+                    <p>Total Drones: <span id="totalDrones">0</span></p>
+                    <p>Violations: <span id="totalViolations">0</span></p>
+                    <p>Active Zone: <span id="activeZone">All</span></p>
+                </div>
+                <div class="table-wrapper">
+                    <table id="violationTable">
+                        <thead>
+                            <tr>
+                                <th>Drone ID</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                                <th>Country</th>
+                                <th>State/Zone</th>
+                                <th>Status</th>
+                                <th>Frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
